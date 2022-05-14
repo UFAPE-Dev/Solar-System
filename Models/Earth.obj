@@ -1,6 +1,6 @@
 # Blender v2.79 (sub 0) OBJ File: 'earth.blend1'
 # www.blender.org
-mtllib Earth.mtl
+mtllib Terra.mtl
 o Cube.001_Cube.004
 v 0.536374 -0.161933 -0.808567
 v 0.536374 -0.032754 -0.808567
