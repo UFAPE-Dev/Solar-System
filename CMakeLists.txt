@@ -4,7 +4,7 @@ project (SolarSystem)
 #Adiciona os arquivos CMake que encontram as bibliotecas
 list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
 #Para linux
-set(OpenGlLinkers -lglut -lGLU -lX11 -lpthread -lXrandr -lXi -ldl)
+set(OpenGlLinkers -lglut -lGLU -lX11 -lpthread -lXrandr -lXi -ldl -lassimp)
 
 #Usa o pacote para encontrar bibliotecas
 include(FindPkgConfig)
@@ -26,14 +26,13 @@ target_include_directories(glad PUBLIC ${EXT_INCLUDE_DIR})
 add_executable(${PROJECT_NAME}
         main.cpp main.h
         libraries/GLAD/lib/glad.c
-        libraries/STB/lib/stb.h
         Classes/Mesh.h
         Classes/Shader.h
-        Classes/Model.h)
+        Classes/Model.h Classes/Camera.h)
 
 
 
 #Diretório de headers
-include_directories(${GLFW_INCLUDE_DIR} ${GLAD_INCLUDE_DIR})
+include_directories(${GLFW_INCLUDE_DIR} ${GLAD_INCLUDE_DIR} libraries/STB/lib)
 #Link das bibliotecas
-target_link_libraries(${PROJECT_NAME} ${GLFW_LIBRARY} glad ${OpenGlLinkers})
+target_link_libraries(${PROJECT_NAME} ${GLFW_LIBRARY} ${OpenGlLinkers} glad stb)
