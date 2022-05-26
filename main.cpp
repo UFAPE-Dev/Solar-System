@@ -21,7 +21,7 @@ const unsigned int SCR_HEIGHT = 700;
 const float SUN_SIZE = 30.0;
 
 // camera
-Camera camera(glm::vec3(0.0f, 750.0f, 750.0f));
+Camera camera(glm::vec3(0.0f, 2500.0f, 0.0f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -143,16 +143,16 @@ int main()
         float mercuryScale = 10;
         mercury = glm::translate(mercury, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
         mercury = glm::scale(mercury, glm::vec3(mercuryScale, mercuryScale, mercuryScale));
-        mercury = glm::rotate(mercury, (float) glfwGetTime() -10, glm::vec3(0.0f, 1.0f, 1.0f));
-        mercury = glm::translate(mercury, glm::vec3(17.5f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        mercury = glm::rotate(mercury, (float) glfwGetTime() -10, glm::vec3(0.0f, 1.0f, 0.0f));
+        mercury = glm::translate(mercury, glm::vec3(0.0f, 0.0f, 17.5f)); // translate it down so it's at the center of the scene
         ourShader.setMat4("model", mercury);
         Mercury.Draw(ourShader);
 
         glm::mat4 venus = glm::mat4(1.0f);
         venus = glm::translate(venus, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
         venus = glm::scale(venus, glm::vec3(15, 15, 15));
-        venus = glm::rotate(venus, (float) glfwGetTime() -20, glm::vec3(0.0f, 1.0f, 1.0f));// it's a bit too big for our scene, so scale it down
-        venus = glm::translate(venus, glm::vec3(22, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        venus = glm::rotate(venus, (float) glfwGetTime() -20, glm::vec3(0.0f, 1.0f, 0.0f));// it's a bit too big for our scene, so scale it down
+        venus = glm::translate(venus, glm::vec3(0.0f, 0.0f, 22)); // translate it down so it's at the center of the scene
         ourShader.setMat4("model", venus);
         Venus.Draw(ourShader);
 
@@ -160,8 +160,8 @@ int main()
         glm::mat4 earth = glm::mat4(1.0f);
         earth = glm::translate(earth, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
         earth = glm::scale(earth, glm::vec3(17, 17, 17));
-        earth = glm::rotate(earth, (float) glfwGetTime() -30, glm::vec3(0.0f, 1.0f, 1.0f));// it's a bit too big for our scene, so scale it down
-        earth = glm::translate(earth, glm::vec3(26, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        earth = glm::rotate(earth, (float) glfwGetTime() -30, glm::vec3(0.0f, 1.0f, 0.0f));// it's a bit too big for our scene, so scale it down
+        earth = glm::translate(earth, glm::vec3(0.0f, 0.0f, 26)); // translate it down so it's at the center of the scene
         ourShader.setMat4("model", earth);
         Earth.Draw(ourShader);
         earth = glm::scale(earth, glm::vec3(0.5, 0.5, 0.5));
@@ -181,40 +181,40 @@ int main()
         glm::mat4 mars = glm::mat4(1.0f);
         mars = glm::translate(mars, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
         mars = glm::scale(mars, glm::vec3(13, 13, 13));
-        mars = glm::rotate(mars, (float) glfwGetTime()-40, glm::vec3(0.0f, 1.0f, 1.0f));// it's a bit too big for our scene, so scale it down
-        mars = glm::translate(mars, glm::vec3(50, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        mars = glm::rotate(mars, (float) glfwGetTime()-40, glm::vec3(0.0f, 1.0f, 0.0f));// it's a bit too big for our scene, so scale it down
+        mars = glm::translate(mars, glm::vec3(0.0f, 0.0f, 50)); // translate it down so it's at the center of the scene
         ourShader.setMat4("model", mars);
         Mars.Draw(ourShader);
 
         glm::mat4 jupiter = glm::mat4(1.0f);
         jupiter = glm::translate(jupiter, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
         jupiter = glm::scale(jupiter, glm::vec3(45,45, 45));
-        jupiter = glm::rotate(jupiter, (float) glfwGetTime()-50, glm::vec3(0.0f, 1.0f, 1.0f));// it's a bit too big for our scene, so scale it down
-        jupiter = glm::translate(jupiter, glm::vec3(30, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        jupiter = glm::rotate(jupiter, (float) glfwGetTime()-50, glm::vec3(0.0f, 1.0f, 0.0f));// it's a bit too big for our scene, so scale it down
+        jupiter = glm::translate(jupiter, glm::vec3(0.0f, 0.0f, 30)); // translate it down so it's at the center of the scene
         ourShader.setMat4("model", jupiter);
         Jupiter.Draw(ourShader);
 
         glm::mat4 saturn = glm::mat4(1.0f);
         saturn = glm::translate(saturn, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
         saturn = glm::scale(saturn, glm::vec3(42, 42, 42));
-        saturn = glm::rotate(saturn, (float) glfwGetTime()-60, glm::vec3(0.0f, 1.0f, 1.0f));// it's a bit too big for our scene, so scale it down
-        saturn = glm::translate(saturn, glm::vec3(60, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        saturn = glm::rotate(saturn, (float) glfwGetTime()-60, glm::vec3(0.0f, 1.0f, 0.0f));// it's a bit too big for our scene, so scale it down
+        saturn = glm::translate(saturn, glm::vec3(0.0f, 0.0f, 60)); // translate it down so it's at the center of the scene
         ourShader.setMat4("model", saturn);
         Saturn.Draw(ourShader);
 
         glm::mat4 uranus = glm::mat4(1.0f);
         uranus = glm::translate(uranus, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
         uranus = glm::scale(uranus, glm::vec3(30, 30, 30));
-        uranus = glm::rotate(uranus, (float) glfwGetTime()-70, glm::vec3(0.0f, 1.0f, 1.0f));// it's a bit too big for our scene, so scale it down
-        uranus = glm::translate(uranus, glm::vec3(120, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        uranus = glm::rotate(uranus, (float) glfwGetTime()-70, glm::vec3(0.0f, 1.0f, 0.0f));// it's a bit too big for our scene, so scale it down
+        uranus = glm::translate(uranus, glm::vec3(0.0f, 0.0f, 120)); // translate it down so it's at the center of the scene
         ourShader.setMat4("model", uranus);
         Uranus.Draw(ourShader);
 
         glm::mat4 neptune = glm::mat4(1.0f);
         neptune = glm::translate(neptune, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
         neptune = glm::scale(neptune, glm::vec3(29, 29, 29));
-        neptune = glm::rotate(neptune, (float) glfwGetTime()-80, glm::vec3(0.0f, 1.0f, 1.0f));// it's a bit too big for our scene, so scale it down
-        neptune = glm::translate(neptune, glm::vec3(180, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        neptune = glm::rotate(neptune, (float) glfwGetTime()-80, glm::vec3(0.0f, 1.0f, 0.0f));// it's a bit too big for our scene, so scale it down
+        neptune = glm::translate(neptune, glm::vec3(0.0f, 0.0f, 180)); // translate it down so it's at the center of the scene
         ourShader.setMat4("model", neptune);
         Neptune.Draw(ourShader);
 
