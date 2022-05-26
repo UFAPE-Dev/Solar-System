@@ -1,38 +1,24 @@
-cmake_minimum_required(VERSION 3.22)
-project (SolarSystem)
+cmake_minimum_required(VERSION 3.0.0)
+project(solar_system VERSION 0.1.0)
 
-#Adiciona os arquivos CMake que encontram as bibliotecas
-list(APPEND CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake")
-#Para linux
-set(OpenGlLinkers -lglut -lGLU -lX11 -lpthread -lXrandr -lXi -ldl -lassimp)
+include(CTest)
+enable_testing()
 
-#Usa o pacote para encontrar bibliotecas
-include(FindPkgConfig)
-#Define a versão do CMake
-set(CMAKE_CXX_STANDARD 14)
+set (GLFW_BUILD_DOCS OFF CACHE BOOL "" FORCE)
+set (GLFW_BUILD_TESTS OFF CACHE BOOL "" FORCE)
+set (GLFW_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -ldl -lGLESv2 -lassimp")
 
-#Procura o GLFW
-find_package(GLFW REQUIRED)
+set(BUILD_STATIC_LIB ON)
 
-#Adiciona o GLAD
-add_library(glad libraries/GLAD/lib/glad.c libraries/GLAD/lib/glad.c)
-target_include_directories(glad PUBLIC libraries/GLAD/lib)
+add_subdirectory(ext/glfw)
+add_subdirectory(ext/glad)
+add_subdirectory(ext/glm)
 
-
+include_directories(ext/STB/lib)
+add_subdirectory(src)
 
 
-
-#Nome do executável
-add_executable(${PROJECT_NAME}
-        main.cpp main.h
-        libraries/GLAD/lib/glad.c
-        Classes/Mesh.h
-        Classes/Shader.h
-        Classes/Model.h Classes/Camera.h)
-
-
-
-#Diretório de headers
-include_directories(${GLFW_INCLUDE_DIR} ${GLAD_INCLUDE_DIR} libraries/STB/lib)
-#Link das bibliotecas
-target_link_libraries(${PROJECT_NAME} ${GLFW_LIBRARY} ${OpenGlLinkers} glad stb)
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PROJECT_VERSION ${PROJECT_VERSION})
+include(CPack)
