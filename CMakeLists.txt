@@ -16,7 +16,7 @@ find_package(GLFW REQUIRED)
 
 #Adiciona o GLAD
 add_library(glad libraries/GLAD/lib/glad.c libraries/GLAD/lib/glad.c)
-target_include_directories(glad PUBLIC ${EXT_INCLUDE_DIR})
+target_include_directories(glad PUBLIC libraries/GLAD/lib)
 
 
 

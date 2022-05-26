@@ -1,5 +1,5 @@
 # The places to look for the tinyxml2 folders
-set(FIND_GLFW_PATH /home/pedrovincius/Repositórios/Solar-System/libraries/GLFW)             # On Mac, this is where my tinyxml2 folder is
+set(FIND_GLFW_PATH /home/pedrovincius/Desktop/Temp/Solar-System/libraries/GLFW)             # On Mac, this is where my tinyxml2 folder is
 
 # The location of the include folder (and thus the header files)
 # find_path uses the paths we defined above as places to look
