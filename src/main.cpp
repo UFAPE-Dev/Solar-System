@@ -95,6 +95,7 @@ int main()
 
     Model Background("resources/Models/Background/Background.obj");
     Model Line("resources/Models/Line/Line.obj");
+    Model Line2("resources/Models/Line2/Line2.obj");
 
 
     // draw in wireframe
@@ -220,13 +221,68 @@ int main()
         ourShader.setMat4("model", neptune);
         Neptune.Draw(ourShader);
 
-//        colorShader.use();
-        glm::mat4 ringmatrix = glm::mat4(1.0f);
-        float ringmatrixScale = 200;
-        ringmatrix = glm::translate(ringmatrix, glm::vec3(-100.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
-        ringmatrix = glm::scale(ringmatrix, glm::vec3(ringmatrixScale, ringmatrixScale, ringmatrixScale));
-        ourShader.setMat4("model", ringmatrix);
+        colorShader.use();
+
+        colorShader.setMat4("projection", projection);
+        colorShader.setMat4("view", view);
+
+
+        glm::mat4 orbitaMercurio = glm::mat4(1.0f);
+        float orbitaMercurioScale = 180;
+        orbitaMercurio = glm::translate(orbitaMercurio, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        orbitaMercurio = glm::scale(orbitaMercurio, glm::vec3(orbitaMercurioScale, orbitaMercurioScale, orbitaMercurioScale));
+        colorShader.setMat4("model", orbitaMercurio);
         Line.Draw(colorShader);
+
+        glm::mat4 orbitaVenus = glm::mat4(1.0f);
+        float orbitaVenusScale = 350;
+        orbitaVenus = glm::translate(orbitaVenus, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        orbitaVenus = glm::scale(orbitaVenus, glm::vec3(orbitaVenusScale, orbitaVenusScale, orbitaVenusScale));
+        colorShader.setMat4("model", orbitaVenus);
+        Line.Draw(colorShader);
+
+        glm::mat4 orbitaTerra = glm::mat4(1.0f);
+        float orbitaTerraScale = 450;
+        orbitaTerra = glm::translate(orbitaTerra, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        orbitaTerra = glm::scale(orbitaTerra, glm::vec3(orbitaTerraScale, orbitaTerraScale, orbitaTerraScale));
+        colorShader.setMat4("model", orbitaTerra);
+        Line.Draw(colorShader);
+
+        glm::mat4 orbitaMarte = glm::mat4(1.0f);
+        float orbitaMarteScale = 655;
+        orbitaMarte = glm::translate(orbitaMarte, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        orbitaMarte = glm::scale(orbitaMarte, glm::vec3(orbitaMarteScale, orbitaMarteScale, orbitaMarteScale));
+        colorShader.setMat4("model", orbitaMarte);
+        Line.Draw(colorShader);
+
+        glm::mat4 orbitaJupiter = glm::mat4(1.0f);
+        float orbitaJupiterScale = 1350;
+        orbitaJupiter = glm::translate(orbitaJupiter, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        orbitaJupiter = glm::scale(orbitaJupiter, glm::vec3(orbitaJupiterScale, orbitaJupiterScale, orbitaJupiterScale));
+        colorShader.setMat4("model", orbitaJupiter);
+        Line2.Draw(colorShader);
+
+        glm::mat4 orbitaSaturno = glm::mat4(1.0f);
+        float orbitaSaturnoScale = 2550;
+        orbitaSaturno = glm::translate(orbitaSaturno, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        orbitaSaturno = glm::scale(orbitaSaturno, glm::vec3(orbitaSaturnoScale, orbitaSaturnoScale, orbitaSaturnoScale));
+        colorShader.setMat4("model", orbitaSaturno);
+        Line2.Draw(colorShader);
+
+        glm::mat4 orbitaUrano = glm::mat4(1.0f);
+        float orbitaUranoScale = 3650;
+        orbitaUrano = glm::translate(orbitaUrano, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        orbitaUrano = glm::scale(orbitaUrano, glm::vec3(orbitaUranoScale, orbitaUranoScale, orbitaUranoScale));
+        colorShader.setMat4("model", orbitaUrano);
+        Line2.Draw(colorShader);
+
+        glm::mat4 orbitaNetuno = glm::mat4(1.0f);
+        float orbitaNetunoScale = 5300;
+        orbitaNetuno = glm::translate(orbitaNetuno, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        orbitaNetuno = glm::scale(orbitaNetuno, glm::vec3(orbitaNetunoScale, orbitaNetunoScale, orbitaNetunoScale));
+        colorShader.setMat4("model", orbitaNetuno);
+        Line2.Draw(colorShader);
+
 
      // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
