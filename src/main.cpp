@@ -21,7 +21,7 @@ const unsigned int SCR_HEIGHT = 700;
 const float SUN_SIZE = 30.0;
 
 // camera
-Camera camera(glm::vec3(3750.0f, 1500.0f, -1000.0f), glm::vec3(0, 1, -0.1f));
+Camera camera(glm::vec3(3750.0f, 1500.0f, -1000.0f), glm::vec3(0, 1.0f, -0.1f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
