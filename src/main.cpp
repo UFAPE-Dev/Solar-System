@@ -21,7 +21,7 @@ const unsigned int SCR_HEIGHT = 700;
 const float SUN_SIZE = 30.0;
 
 // camera
-Camera camera(glm::vec3(0.0f, 0.0f, 2500.0f));
+Camera camera(glm::vec3(3750.0f, 1500.0f, -1000.0f), glm::vec3(0, 1, -0.1f));
 float lastX = SCR_WIDTH / 2.0f;
 float lastY = SCR_HEIGHT / 2.0f;
 bool firstMouse = true;
@@ -78,6 +78,7 @@ int main()
     // build and compile shaders
     // -------------------------
     Shader ourShader("resources/Shaders/model_loading.vert", "resources/Shaders/model_loading.frag");
+    Shader colorShader("resources/Shaders/model_loading.vert", "resources/Shaders/color.frag");
 
     // load models
     // -----------
@@ -93,6 +94,7 @@ int main()
     Model Neptune("resources/Models/Neptune/Neptune.obj");
 
     Model Background("resources/Models/Background/Background.obj");
+    Model Line("resources/Models/Line/Line.obj");
 
 
     // draw in wireframe
@@ -156,7 +158,6 @@ int main()
         ourShader.setMat4("model", venus);
         Venus.Draw(ourShader);
 
-        float earthDistante = 149.6f;
         glm::mat4 earth = glm::mat4(1.0f);
         earth = glm::translate(earth, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
         earth = glm::scale(earth, glm::vec3(17, 17, 17));
@@ -164,8 +165,9 @@ int main()
         earth = glm::translate(earth, glm::vec3(0.0f, 0.0f, 26)); // translate it down so it's at the center of the scene
         ourShader.setMat4("model", earth);
         Earth.Draw(ourShader);
+        //lua
         earth = glm::scale(earth, glm::vec3(0.5, 0.5, 0.5));
-        earth = glm::rotate(earth, (float) glfwGetTime() -30, glm::vec3(1.0f, 1.0f, 0.0f));// it's a bit too big for our scene, so scale it down
+        earth = glm::rotate(earth, (float) glfwGetTime() -30, glm::vec3(0.0f, 1.0f, 0.0f));// it's a bit too big for our scene, so scale it down
         earth = glm::translate(earth, glm::vec3(-3, 0, 8));
         ourShader.setMat4("model", earth);
         Moon.Draw(ourShader);
@@ -217,6 +219,14 @@ int main()
         neptune = glm::translate(neptune, glm::vec3(0.0f, 0.0f, 180)); // translate it down so it's at the center of the scene
         ourShader.setMat4("model", neptune);
         Neptune.Draw(ourShader);
+
+//        colorShader.use();
+        glm::mat4 ringmatrix = glm::mat4(1.0f);
+        float ringmatrixScale = 200;
+        ringmatrix = glm::translate(ringmatrix, glm::vec3(-100.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
+        ringmatrix = glm::scale(ringmatrix, glm::vec3(ringmatrixScale, ringmatrixScale, ringmatrixScale));
+        ourShader.setMat4("model", ringmatrix);
+        Line.Draw(colorShader);
 
      // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
