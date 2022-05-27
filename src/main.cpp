@@ -180,6 +180,35 @@ int main()
         jupiter = glm::translate(jupiter, glm::vec3(0.0f, 0.0f, 30)); // translate it down so it's at the center of the scene
         planetas_shader.setMat4("model", jupiter);
         Jupiter.Draw(planetas_shader);
+        glm::mat4 moon1 = jupiter;
+        glm::mat4 moon2 = jupiter;
+        glm::mat4 moon3 = jupiter;
+        glm::mat4 moon4 = jupiter;
+        jupiter = glm::scale(jupiter, glm::vec3(0.1, 0.1, 0.1));
+        jupiter = glm::rotate(jupiter, tempo, glm::vec3(0.0f, 1.0f, 0.0f));// it's a bit too big for our scene, so scale it down
+        jupiter = glm::translate(jupiter, glm::vec3(-40, 0, 10));
+        planetas_shader.setMat4("model", jupiter);
+        Moon.Draw(planetas_shader);
+        moon1 = glm::scale(moon1, glm::vec3(0.1, 0.1, 0.1));
+        moon1 = glm::rotate(moon1, tempo * 2, glm::vec3(0.0f, 1.0f, 0.0f));// it's a bit too big for our scene, so scale it down
+        moon1 = glm::translate(moon1, glm::vec3(-30, 15, -20));
+        planetas_shader.setMat4("model", moon1);
+        Moon.Draw(planetas_shader);
+        moon2 = glm::scale(moon2, glm::vec3(0.1, 0.1, 0.1));
+        moon2 = glm::rotate(moon2, tempo / 2, glm::vec3(0.0f, 1.0f, 0.0f));// it's a bit too big for our scene, so scale it down
+        moon2 = glm::translate(moon2, glm::vec3(-25, -10, 10));
+        planetas_shader.setMat4("model", moon2);
+        Moon.Draw(planetas_shader);
+        moon3 = glm::scale(moon3, glm::vec3(0.1, 0.1, 0.1));
+        moon3 = glm::rotate(moon3, tempo * 0.5f, glm::vec3(0.0f, 1.0f, 0.0f));// it's a bit too big for our scene, so scale it down
+        moon3 = glm::translate(moon3, glm::vec3(-25, 10, 20));
+        planetas_shader.setMat4("model", moon3);
+        Moon.Draw(planetas_shader);
+        moon4 = glm::scale(moon4, glm::vec3(0.1, 0.1, 0.1));
+        moon4 = glm::rotate(moon4, tempo / 0.5f, glm::vec3(0.0f, 1.0f, 0.0f));// it's a bit too big for our scene, so scale it down
+        moon4 = glm::translate(moon4, glm::vec3(-40, -15, 10));
+        planetas_shader.setMat4("model", moon4);
+        Moon.Draw(planetas_shader);
 
         glm::mat4 saturn = glm::mat4(1.0f);
         saturn = glm::translate(saturn, glm::vec3(0.0f, 0.0f, 0.0f)); // translate it down so it's at the center of the scene
