@@ -67,18 +67,18 @@ private:
         processNode(scene->mRootNode, scene);
     }
 
-    // processes a node in a recursive fashion. Processes each individual mesh located at the node and repeats this process on its children nodes (if any).
+    //Função para processar cada nó
     void processNode(aiNode *node, const aiScene *scene)
     {
-        // process each mesh located at the current node
+        //Percorremos cada índice do no
         for(unsigned int i = 0; i < node->mNumMeshes; i++)
         {
-            // the node object only contains indices to index the actual objects in the scene. 
-            // the scene contains all the data, node is just to keep stuff organized (like relations between nodes).
+            //Pegamos a mesh com base no nó atual, o nó só guarda os índices. Por fim, adicionamos a mesh
             aiMesh* mesh = scene->mMeshes[node->mMeshes[i]];
             meshes.push_back(processMesh(mesh, scene));
         }
-        // after we've processed all of the meshes (if any) we then recursively process each of the children nodes
+
+        //Continuamos o processo para os próximos nós.
         for(unsigned int i = 0; i < node->mNumChildren; i++)
         {
             processNode(node->mChildren[i], scene);
@@ -88,7 +88,7 @@ private:
 
     Mesh processMesh(aiMesh *mesh, const aiScene *scene)
     {
-        // data to fill
+        //Informações que serão preenchidas
         vector<Vertex> vertices;
         vector<unsigned int> indices;
         vector<Texture> textures;
@@ -97,13 +97,15 @@ private:
         for(unsigned int i = 0; i < mesh->mNumVertices; i++)
         {
             Vertex vertex;
-            glm::vec3 vector; // we declare a placeholder vector since assimp uses its own vector class that doesn't directly convert to glm's vec3 class so we transfer the data to this placeholder glm::vec3 first.
-            // positions
+            glm::vec3 vector;
+
+            //Pega as coordenadas
             vector.x = mesh->mVertices[i].x;
             vector.y = mesh->mVertices[i].y;
             vector.z = mesh->mVertices[i].z;
             vertex.Position = vector;
-            // normals
+
+            //As normais
             if (mesh->HasNormals())
             {
                 vector.x = mesh->mNormals[i].x;
@@ -111,12 +113,13 @@ private:
                 vector.z = mesh->mNormals[i].z;
                 vertex.Normal = vector;
             }
-            // texture coordinates
-            if(mesh->mTextureCoords[0]) // does the mesh contain texture coordinates?
+
+            //Verifica se tem texturas
+            if(mesh->mTextureCoords[0])
             {
                 glm::vec2 vec;
-                // a vertex can contain up to 8 different texture coordinates. We thus make the assumption that we won't 
-                // use models where a vertex can have multiple texture coordinates so we always take the first set (0).
+
+                //Coordenadas das texturas
                 vec.x = mesh->mTextureCoords[0][i].x;
                 vec.y = mesh->mTextureCoords[0][i].y;
                 vertex.TexCoords = vec;
