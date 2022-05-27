@@ -12,5 +12,6 @@ uniform mat4 projection;
 void main()
 {
     TexCoords = aTexCoords;
+    //Gera o clip = model é a matriz que sofreu operações, projection o campo de visão e view a posição da câmera vec4(aPos, 1.0) é a coordenada do vértice;
     gl_Position = projection * view * model * vec4(aPos, 1.0);
 }

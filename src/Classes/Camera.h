@@ -7,23 +7,20 @@
 
 #include <vector>
 
-// Defines several possible options for camera movement. Used as abstraction to stay away from window-system specific input methods
-enum Camera_Movement {
+enum Movimentos_de_camera {
     FORWARD,
     BACKWARD,
     LEFT,
     RIGHT
 };
 
-// Default camera values
 const float YAW         = -195.1f;
 const float PITCH       =  -22.9F;
-const float SPEED       =  2.5f;
+const float SPEED       =  1000.5f;
 const float SENSITIVITY =  0.1f;
 const float ZOOM        =  45.0f;
 
 
-// An abstract camera class that processes input and calculates the corresponding Euler Angles, Vectors and Matrices for use in OpenGL
 class Camera
 {
 public:
@@ -44,17 +41,9 @@ public:
     // constructor with vectors
     Camera(glm::vec3 position = glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3 up = glm::vec3(0.0f, 1.0f, 0.0f), float yaw = YAW, float pitch = PITCH) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
     {
+        //Pitch determina o quanto estamos olhando para cima, yaw determina o quanto estamos olhando na magnitude
         Position = position;
         WorldUp = up;
-        Yaw = yaw;
-        Pitch = pitch;
-        updateCameraVectors();
-    }
-    // constructor with scalar values
-    Camera(float posX, float posY, float posZ, float upX, float upY, float upZ, float yaw, float pitch) : Front(glm::vec3(0.0f, 0.0f, -1.0f)), MovementSpeed(SPEED), MouseSensitivity(SENSITIVITY), Zoom(ZOOM)
-    {
-        Position = glm::vec3(posX, posY, posZ);
-        WorldUp = glm::vec3(upX, upY, upZ);
         Yaw = yaw;
         Pitch = pitch;
         updateCameraVectors();
@@ -66,10 +55,10 @@ public:
         return glm::lookAt(Position, Position + Front, Up);
     }
 
-    // processes input received from any keyboard-like input system. Accepts input parameter in the form of camera defined ENUM (to abstract it from windowing systems)
-    void ProcessKeyboard(Camera_Movement direction, float deltaTime)
+    void ProcessKeyboard(Movimentos_de_camera direction, float deltaTime)
     {
-        float velocity = MovementSpeed * deltaTime * 500;
+        //Mudamos a posição da câmera com base na velocidade edfinda anteriormente e com base no deltatime
+        float velocity = MovementSpeed * deltaTime;
         if (direction == FORWARD)
             Position += Front * velocity;
         if (direction == BACKWARD)
@@ -80,16 +69,16 @@ public:
             Position += Right * velocity;
     }
 
-    // processes input received from a mouse input system. Expects the offset value in both the x and y direction.
     void ProcessMouseMovement(float xoffset, float yoffset, GLboolean constrainPitch = true)
     {
+        //Se não mutiplicado o mouse fica muito solto
         xoffset *= MouseSensitivity;
         yoffset *= MouseSensitivity;
 
         Yaw   += xoffset;
         Pitch += yoffset;
 
-        // make sure that when pitch is out of bounds, screen doesn't get flipped
+        // Garante que o usuário não possa olhar além de 90º
         if (constrainPitch)
         {
             if (Pitch > 89.0f)
@@ -98,14 +87,13 @@ public:
                 Pitch = -89.0f;
         }
 
-        // update Front, Right and Up Vectors using the updated Euler angles
         updateCameraVectors();
     }
 
-    // processes input received from a mouse scroll-wheel event. Only requires input on the vertical wheel-axis
+    //Limita o scrol do usuário, amenta ou diminui o fov
     void ProcessMouseScroll(float yoffset)
     {
-        Zoom -= (float)yoffset;
+        Zoom -= (float) yoffset;
         if (Zoom < 1.0f)
             Zoom = 1.0f;
         if (Zoom > 45.0f)
@@ -113,7 +101,8 @@ public:
     }
 
 private:
-    // calculates the front vector from the Camera's (updated) Euler Angles
+    //Poderiamos definir um valor estático para o center, entretanto, para termos movimento na câmera calcularesmos os 3 eixos de Euler
+    //Pitch determina o quanto estamos olhando para cima, yaw determina o quanto estamos olhando na magnitude
     void updateCameraVectors()
     {
         // calculate the new Front vector
